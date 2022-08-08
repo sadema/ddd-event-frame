@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>nl.kristalsoftware.ddd.domain</groupId>
 	<artifactId>ddd-event-frame</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-baseTypes-SNAPSHOT</version>
 	<name>ddd-event-frame</name>
 	<description>Little framework for ddd event sourcing projects</description>
 	<properties>
