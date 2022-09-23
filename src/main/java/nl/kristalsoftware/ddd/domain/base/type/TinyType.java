@@ -1,10 +1,10 @@
-package nl.kristalsoftware.ddd.domain.base;
+package nl.kristalsoftware.ddd.domain.base.type;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.kristalsoftware.ddd.domain.base.annotations.ValueObject;
+import nl.kristalsoftware.ddd.domain.base.annotation.ValueObject;
 
 @Slf4j
 @Getter

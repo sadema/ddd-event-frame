@@ -1,7 +1,7 @@
-package nl.kristalsoftware.ddd.domain.base;
+package nl.kristalsoftware.ddd.domain.base.type;
 
 
-import nl.kristalsoftware.ddd.domain.base.annotations.ValueObject;
+import nl.kristalsoftware.ddd.domain.base.annotation.ValueObject;
 
 import java.time.Instant;
 import java.time.LocalDate;
