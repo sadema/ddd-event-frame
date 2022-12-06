@@ -1,4 +1,4 @@
-package nl.kristalsoftware.ddd.domain.base;
+package nl.kristalsoftware.ddd.domain.base.type;
 
 import java.util.UUID;
 

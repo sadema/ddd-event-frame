@@ -1,6 +1,6 @@
-package nl.kristalsoftware.ddd.domain.base;
+package nl.kristalsoftware.ddd.domain.base.type;
 
-import nl.kristalsoftware.ddd.domain.base.annotations.ValueObject;
+import nl.kristalsoftware.ddd.domain.base.annotation.ValueObject;
 
 @ValueObject
 public abstract class TinyIntegerType<T> extends TinyType<Integer> {

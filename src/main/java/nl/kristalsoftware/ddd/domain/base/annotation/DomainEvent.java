@@ -1,18 +1,18 @@
-package nl.kristalsoftware.ddd.domain.base.annotations;
+package nl.kristalsoftware.ddd.domain.base.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
- * Represents a value of the domain.
- * A value has no identity and is immutable.
+ * Marks a type as a domain event.
+ * An event indicates that something has happened that is relevant to domain experts.
  *
  * @author Henning Schwentner
  * @since 1.0
  */
 @Target(ElementType.TYPE)
 @Documented
-public @interface ValueObject {
+public @interface DomainEvent {
 
 }

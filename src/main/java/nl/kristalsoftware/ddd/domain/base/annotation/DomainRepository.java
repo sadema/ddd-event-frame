@@ -1,4 +1,4 @@
-package nl.kristalsoftware.ddd.domain.base.annotations;
+package nl.kristalsoftware.ddd.domain.base.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
