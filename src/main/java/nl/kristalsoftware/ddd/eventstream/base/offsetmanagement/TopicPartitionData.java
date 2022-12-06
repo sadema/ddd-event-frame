@@ -27,7 +27,8 @@ public class TopicPartitionData {
 
     private String topicName;
 
-    private Integer partition;
+    @Column(name = "partition_number")
+    private Integer partitionNumber;
 
     @Setter
     @Column(name = "partition_offset")

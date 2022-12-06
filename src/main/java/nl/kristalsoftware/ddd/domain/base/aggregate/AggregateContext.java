@@ -1,26 +1,23 @@
 package nl.kristalsoftware.ddd.domain.base.aggregate;
 
-import lombok.Getter;
 import nl.kristalsoftware.ddd.domain.base.PersistenceFactoryPort;
-import nl.kristalsoftware.ddd.domain.base.command.BaseCommand;
 import nl.kristalsoftware.ddd.domain.base.event.BaseDomainEvent;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AggregateContext<T extends BaseAggregateRoot<U>,U> {
 
     private final AggregateFactory<T,U> aggregateFactory;
-    @Getter
-    private final List<BaseDomainEvent<T>> domainEventList = new ArrayList<>();
+    private final PersistenceFactoryPort<T> persistenceFactoryPort;
 
-    protected AggregateContext(AggregateFactory<T,U> aggregateFactory) {
+    protected AggregateContext(AggregateFactory<T,U> aggregateFactory, PersistenceFactoryPort<T> persistenceFactoryPort) {
         this.aggregateFactory = aggregateFactory;
+        this.persistenceFactoryPort = persistenceFactoryPort;
     }
 
     public void loadDomainEvents(T aggregate) {
-        List<BaseDomainEvent<T>> aggregateDomainEvents = getPersistenceFactoryPort().findAllDomainEventsByReference(aggregate);
+        List<BaseDomainEvent<T>> aggregateDomainEvents = persistenceFactoryPort.findAllDomainEventsByReference(aggregate);
         loadDomainEvents(aggregateDomainEvents);
     }
 
@@ -31,24 +28,13 @@ public abstract class AggregateContext<T extends BaseAggregateRoot<U>,U> {
 
     public abstract T getAggregate();
 
-    public abstract PersistenceFactoryPort<T> getPersistenceFactoryPort();
-
-    public void sendCommand(BaseCommand<T,U> command) throws AggregateNotFoundException {
-        command.handleCommand(this);
-    }
-
-    public void addEvent(BaseDomainEvent<T> event) {
-        domainEventList.add(event);
-    }
-
     @Transactional
-    public void saveEvents() throws AggregateNotFoundException {
-        createPersistenceProcessor();
-        domainEventList.stream().forEach(it -> {
-            it.save(getAggregate());
-        });
-        getAggregate().saveDocument();
+    public void saveEvents() {
+        saveAllEvents();
+        saveDocument();
     }
 
-    protected abstract void createPersistenceProcessor() throws AggregateNotFoundException;
+    protected abstract void saveDocument();
+
+    protected abstract void saveAllEvents();
 }

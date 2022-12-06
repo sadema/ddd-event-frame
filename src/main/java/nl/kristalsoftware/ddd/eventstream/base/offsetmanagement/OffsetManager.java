@@ -19,7 +19,7 @@ public class OffsetManager implements ConsumerAwareRebalanceListener {
     public void onPartitionsAssigned(Consumer<?, ?> consumer, Collection<TopicPartition> topicPartitions) {
         for (TopicPartition topicPartition : topicPartitions) {
             Optional<TopicPartitionData> topicPartitionDataOptional =
-                    topicPartitionRepository.findOneByTopicNameAndPartition(topicPartition.topic(), topicPartition.partition());
+                    topicPartitionRepository.findOneByTopicNameAndPartitionNumber(topicPartition.topic(), topicPartition.partition());
             topicPartitionDataOptional.ifPresent(it -> {
                 consumer.seek(topicPartition, topicPartitionDataOptional.get().getOffset());
             });

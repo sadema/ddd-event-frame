@@ -29,5 +29,4 @@ public abstract class BaseAggregateRoot<T> {
         this.existingAggregate = true;
     }
 
-    public abstract void saveDocument();
 }

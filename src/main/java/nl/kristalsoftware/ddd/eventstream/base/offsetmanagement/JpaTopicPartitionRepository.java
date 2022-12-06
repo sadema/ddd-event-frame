@@ -8,6 +8,6 @@ import java.util.Optional;
 @Repository
 public interface JpaTopicPartitionRepository extends JpaRepository<TopicPartitionData,Long> {
 
-    Optional<TopicPartitionData> findOneByTopicNameAndPartition(String topicName, Integer partition);
+    Optional<TopicPartitionData> findOneByTopicNameAndPartitionNumber(String topicName, Integer partitionNumber);
 
 }

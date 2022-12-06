@@ -13,7 +13,7 @@ public class TopicPartitionHandler {
 
     public void save(String topic, int partition, long offset) {
         Optional<TopicPartitionData> topicPartitionDataOptional =
-                topicPartitionRepository.findOneByTopicNameAndPartition(topic, partition);
+                topicPartitionRepository.findOneByTopicNameAndPartitionNumber(topic, partition);
         if (topicPartitionDataOptional.isPresent()) {
             TopicPartitionData topicPartitionData = topicPartitionDataOptional.get();
             topicPartitionData.setOffset(offset + 1);

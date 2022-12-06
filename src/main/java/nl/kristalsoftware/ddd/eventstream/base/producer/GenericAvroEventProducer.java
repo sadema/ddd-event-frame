@@ -11,7 +11,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Slf4j
 @Component
-public class GenericEventProducer<T extends SpecificRecord> {
+public class GenericAvroEventProducer<T extends SpecificRecord> {
 
     public void produceEvent(
             KafkaTemplate<String, T> kafkaTemplate,
