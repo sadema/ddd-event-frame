@@ -1,7 +1,9 @@
 package nl.kristalsoftware.ddd.domain.base.command;
 
-public interface BaseCommand<T> {
+import nl.kristalsoftware.ddd.domain.base.aggregate.AggregateRepository;
 
-    void handleCommand(T context);
+public interface BaseCommand<T extends AggregateRepository> {
+
+    void handleCommand(T repository);
 
 }
