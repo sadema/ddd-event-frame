@@ -1,7 +1,10 @@
 package nl.kristalsoftware.ddd.domain.base.aggregate;
 
 import nl.kristalsoftware.ddd.domain.base.command.BaseCommand;
+import nl.kristalsoftware.ddd.domain.base.event.DomainEventSaving;
 
-public interface BaseRepository<T extends AggregateRepository> {
-    void sendCommand(BaseCommand<T> command);
+import java.util.List;
+
+public interface BaseRepository<R extends AggregateRepository, T extends BaseAggregateRoot> {
+    List<DomainEventSaving<R>> sendCommand(BaseCommand<R,T> command);
 }
