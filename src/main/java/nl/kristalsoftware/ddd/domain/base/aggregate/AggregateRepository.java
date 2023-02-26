@@ -1,7 +1,6 @@
 package nl.kristalsoftware.ddd.domain.base.aggregate;
 
 import lombok.Getter;
-import nl.kristalsoftware.ddd.domain.base.command.BaseCommand;
 import nl.kristalsoftware.ddd.domain.base.event.DomainEventLoading;
 import nl.kristalsoftware.ddd.domain.base.event.DomainEventSaving;
 import nl.kristalsoftware.ddd.domain.base.event.EventsRepositoryPort;
@@ -16,9 +15,6 @@ public abstract class AggregateRepository<R extends AggregateRepository, T exten
     private final T aggregate;
     private final EventsRepositoryPort<T> eventsRepositoryPort;
     private final DocumentsRepositoryPort<T> documentsRepositoryPort;
-//    @Getter
-//    private final List<DomainEventSaving<C>> domainEventList = new ArrayList<>();
-
 
     protected AggregateRepository(AggregateFactory<T,U> aggregateFactory, AggregateRepositoryService<T> aggregateRepositoryService) {
         this.aggregate = aggregateFactory.createAggregate();
@@ -49,16 +45,16 @@ public abstract class AggregateRepository<R extends AggregateRepository, T exten
     }
 
     @Transactional
-    public void saveEvents(List<DomainEventSaving<R>> domainEventList) {
-        saveAllEvents(domainEventList);
-        commitDocumentChanges();
+    public boolean saveEvents(List<DomainEventSaving<R>> domainEventList) {
+        if (!domainEventList.isEmpty()) {
+            saveAllEvents(domainEventList);
+            commitDocumentChanges();
+            return true;
+        }
+        return false;
     }
 
     protected abstract R getDomainRepository();
-
-//    public void addEvent(DomainEventSaving<C> domainEvent) {
-//        domainEventList.add(domainEvent);
-//    }
 
     private void saveAllEvents(List<DomainEventSaving<R>> domainEventList) {
         domainEventList.stream().forEach(it -> {
@@ -66,10 +62,10 @@ public abstract class AggregateRepository<R extends AggregateRepository, T exten
         });
     }
 
-    @Override
-    public List<DomainEventSaving<R>> sendCommand(BaseCommand<R,T> command) {
-        return command.handleCommand(getAggregate());
-    }
+//    @Override
+//    public List<DomainEventSaving<R>> sendCommand(BaseCommand<R,T> command) {
+//        return command.handleCommand(getAggregate());
+//    }
 
     private void commitDocumentChanges() {
         documentsRepositoryPort.saveDocument();
