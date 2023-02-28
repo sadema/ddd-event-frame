@@ -14,10 +14,6 @@ public abstract class TinyDateType extends TinyType<LocalDate> {
 		super(value);
 	}
 
-	protected TinyDateType(Long value) {
-		super(null);
-	}
-
 	@Override
 	public Boolean isEmpty() {
 		return getValue() == null;

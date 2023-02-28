@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nl.kristalsoftware.ddd.domain.base.event.BaseDomainEvent;
+import nl.kristalsoftware.ddd.domain.base.event.DomainEventLoading;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
@@ -23,7 +23,7 @@ import java.util.UUID;
 @Inheritance(
         strategy = InheritanceType.JOINED
 )
-public abstract class UUIDBaseEventEntity<T extends BaseDomainEvent<?>> {
+public abstract class UUIDBaseEventEntity<T extends DomainEventLoading> {
 
     @Setter(AccessLevel.NONE)
     @Id
